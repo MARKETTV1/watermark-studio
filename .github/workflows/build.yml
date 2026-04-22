@@ -3,6 +3,7 @@ name: Build WatermarkStudio EXE
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Python 3.11
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
@@ -23,8 +24,8 @@ jobs:
     - name: Build EXE
       run: pyinstaller --onefile --windowed --name "WatermarkStudio" watermark_app.py
 
-    - name: Upload EXE as Artifact
-      uses: actions/upload-artifact@v3
+    - name: Upload EXE
+      uses: actions/upload-artifact@v4
       with:
         name: WatermarkStudio-EXE
         path: dist/WatermarkStudio.exe
